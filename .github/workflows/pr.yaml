@@ -62,7 +62,7 @@ jobs:
       - name: Revoke Vault Token
         if: always()
         run: |
-          curl -XPOST -sv -H "X-Vault-Token: ${{ env.VAULT_TOKEN }}" https://hashi-vault.tailnet-047c.ts.net:8200v/1/auth/token/revoke-self 
+          curl -XPOST -sv -H "X-Vault-Token: ${{ env.VAULT_TOKEN }}" https://hashi-vault.tailnet-047c.ts.net:8200/v1/auth/token/revoke-self 
 
       - name: Summary
         run: |
