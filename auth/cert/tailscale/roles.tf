@@ -4,7 +4,7 @@ locals {
   tailscale_servers = toset([for each in data.tailscale_devices.devices.devices : each if contains(each.tags, "servers")])
 }
 
-resource "vault_cert_auth_backend_role" "cert" {
+resource "vault_cert_auth_backend_role" "tailscale_server_role" {
   for_each = local.tailscale_servers
 
   name                 = each.key.name
