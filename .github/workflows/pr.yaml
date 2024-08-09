@@ -58,7 +58,9 @@ jobs:
         run: |
           echo "#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`" >> $GITHUB_STEP_SUMMARY
           echo "<details><summary>Terraform Format and Style Output</summary>" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "${{ steps.fmt.outputs.stdout }}" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
 
           echo "#### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`" >> $GITHUB_STEP_SUMMARY
