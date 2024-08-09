@@ -31,8 +31,7 @@ jobs:
           url: https://hashi-vault.tailnet-047c.ts.net:8200
           role: gha_rmb938_tf_hashicorp_vault
           method: jwt
-          secrets: |
-              kv/data/test test | TEST;
+          exportToken: true
 
       - uses: hashicorp/setup-terraform@v3
         with:
