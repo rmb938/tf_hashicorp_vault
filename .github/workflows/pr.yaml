@@ -23,6 +23,11 @@ jobs:
           tags: tag:githubactions
           version: "1.70.0"
 
+      - name: Auth GCP
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: 'projects/rmb-lab/locations/global/workloadIdentityPools/github-actions'
+
       - name: Import Secrets
         id: import-secrets
         uses: hashicorp/vault-action@v3

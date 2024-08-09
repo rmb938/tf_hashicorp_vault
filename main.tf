@@ -12,8 +12,7 @@ terraform {
   }
 
   backend "gcs" {
-    bucket      = "rmb-lab-tf_hashicorp_vault"
-    credentials = "secrets/decrypted/terraform-state-sa.json"
+    bucket = "rmb-lab-tf_hashicorp_vault"
   }
 }
 
