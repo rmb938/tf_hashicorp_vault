@@ -1,0 +1,38 @@
+name: Terraform Apply
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  apply:
+    permissions:
+        contents: read
+        id-token: write
+
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Tailscale
+        uses: tailscale/github-action@v2
+        with:
+            oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+            oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+            tags: tag:githubactions
+
+      - name: Import Secrets
+        id: import-secrets
+        uses: hashicorp/vault-action@v2
+        with:
+          url: https://hashi-vault.tailnet-047c.ts.net:8200
+          role: gha_rmb938_tf_hashicorp_vault
+          method: jwt
+          secrets: |
+              secret/data/test test | TEST;
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.3"
