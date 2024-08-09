@@ -6,9 +6,9 @@ on:
 jobs:
   plan:
     permissions:
-        contents: read
-        id-token: write
-        pull-requests: write
+      contents: read
+      id-token: write
+      pull-requests: write
 
     name: Terraform Plan
     runs-on: ubuntu-latest
@@ -50,8 +50,12 @@ jobs:
         run: terraform validate -no-color
 
       - name: Terraform Plan
+        run: terraform plan -out tfplan
+        continue-on-error: true
+
+      - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color
+        run: terraform show -no-color tfplan
         continue-on-error: true
 
       - name: Summary
