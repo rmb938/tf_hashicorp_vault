@@ -5,7 +5,7 @@ locals {
 }
 
 output "tailscale_servers" {
-  value = tailscale_servers
+  value = local.tailscale_servers
 }
 
 # resource "vault_cert_auth_backend_role" "tailscale_server_role" {
