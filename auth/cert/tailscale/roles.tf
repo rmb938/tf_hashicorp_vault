@@ -14,6 +14,6 @@ resource "vault_cert_auth_backend_role" "tailscale_server_role" {
   backend              = vault_auth_backend.cert.path
   allowed_common_names = [each.value.name]
   display_name         = each.value.name
-  token_policies       = ["default"]
+  token_policies       = contact(["default"], [for tag in "ts_${trimprefix(each.value.tags, "hvpolicy-")}" : tag if startswith(tag, "hvpolicy-")])
   token_bound_cidrs    = each.value.addresses
 }
