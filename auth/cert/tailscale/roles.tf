@@ -1,3 +1,5 @@
+data "tailscale_devices" "devices" {}
+
 resource "vault_cert_auth_backend_role" "cert" {
   name                 = "foo"
   certificate          = file("${path.module}/le_isrg_root_x2.pem")

@@ -51,6 +51,9 @@ jobs:
 
       - name: Terraform Plan Show
         id: plan
+        env:
+          oauth-client-id: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
         run: terraform show -no-color tfplan
         continue-on-error: true
 
