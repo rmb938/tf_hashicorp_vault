@@ -27,7 +27,7 @@ jobs:
       - name: Auth GCP
         uses: 'google-github-actions/auth@v2'
         with:
-          workload_identity_provider: 'projects/rmb-lab/locations/global/workloadIdentityPools/github-actions'
+          workload_identity_provider: 'projects/455628669441/locations/global/workloadIdentityPools/github-actions/providers/gha-tf-hashicorp-vault'
 
       - name: Import Secrets
         id: import-secrets
