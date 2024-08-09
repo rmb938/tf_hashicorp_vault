@@ -58,6 +58,12 @@ jobs:
         run: terraform show -no-color tfplan
         continue-on-error: true
 
+      # https://github.com/hashicorp/vault-action/issues/427
+      - name: Revoke Vault Token
+        if: always()
+        run: |
+          curl -XPOST -sv -H "X-Vault-Token: ${{ env.VAULT_TOKEN }}" https://hashi-vault.tailnet-047c.ts.net:8200v/1/auth/token/revoke-self 
+
       - name: Summary
         run: |
           echo "#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`" >> $GITHUB_STEP_SUMMARY
