@@ -13,11 +13,11 @@ resource "null_resource" "tailscale_servers" {
 resource "vault_cert_auth_backend_role" "tailscale_server_role" {
   for_each = local.tailscale_servers
 
-  name                 = each.key.name
+  name                 = each.value.name
   certificate          = file("${path.module}/le_isrg_root_x2.pem")
   backend              = vault_auth_backend.cert.path
-  allowed_common_names = [each.key.name]
-  display_name         = each.key.name
+  allowed_common_names = [each.value.name]
+  display_name         = each.value.name
   token_policies       = ["default"]
-  token_bound_cidrs    = each.key.addresses
+  token_bound_cidrs    = each.value.addresses
 }
