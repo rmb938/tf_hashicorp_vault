@@ -1,7 +1,7 @@
 data "tailscale_devices" "devices" {}
 
 locals {
-  tailscale_servers = toset([for each in data.tailscale_devices.devices.devices : each])
+  tailscale_servers = toset([for each in data.tailscale_devices.devices.devices : each if contains(each.tags, "tag:servers")])
 }
 
 resource "null_resource" "tailscale_servers" {
