@@ -1,0 +1,3 @@
+module "tailscale" {
+  source = "./tailscale"
+}
