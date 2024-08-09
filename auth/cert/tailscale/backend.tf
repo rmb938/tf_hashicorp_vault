@@ -1,4 +1,4 @@
 resource "vault_auth_backend" "cert" {
-  path = "tailscale_cert"
+  path = "tailscale-cert"
   type = "cert"
 }

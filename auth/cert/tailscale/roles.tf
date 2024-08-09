@@ -6,12 +6,6 @@ locals {
   }
 }
 
-resource "null_resource" "tailscale_servers" {
-  triggers = {
-    value = jsonencode(local.tailscale_servers)
-  }
-}
-
 resource "vault_cert_auth_backend_role" "tailscale_server_role" {
   for_each = local.tailscale_servers
 
