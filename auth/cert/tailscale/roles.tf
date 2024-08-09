@@ -6,7 +6,7 @@ locals {
 
 resource "null_resource" "tailscale_servers" {
   triggers = {
-    value = local.tailscale_servers
+    value = jsonencode(local.tailscale_servers)
   }
 }
 
