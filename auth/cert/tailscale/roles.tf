@@ -1,7 +1,7 @@
 data "tailscale_devices" "devices" {}
 
 locals {
-  tailscale_servers = toset([for each in data.tailscale_devices.devices.devices : each if contains(each.tags, "servers")])
+  tailscale_servers = [for each in data.tailscale_devices.devices.devices : each if contains(each.tags, "servers")]
 }
 
 resource "vault_cert_auth_backend_role" "tailscale_server_role" {
