@@ -1,5 +1,9 @@
 data "tailscale_devices" "devices" {}
 
+locals {
+  tailscale_servers = toset([for each in data.tailscale_devices.devices.devices : each if contains(each.tags, "servers")])
+}
+
 resource "vault_cert_auth_backend_role" "cert" {
   name                 = "foo"
   certificate          = file("${path.module}/le_isrg_root_x2.pem")
