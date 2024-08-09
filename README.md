@@ -6,6 +6,7 @@ Terraform to manage Hashicorp Vault
 * Setup JWT auth backend for Github Actions OIDC
   ```bash
   vault auth enable -path=jwt-gha jwt
+  vault write auth/jwt-gha/config oidc_discovery_url="https://token.actions.githubusercontent.com" bound_issuer="https://token.actions.githubusercontent.com"
   ```
 * Create a role for this github repo
   ```bash
