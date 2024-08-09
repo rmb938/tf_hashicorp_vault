@@ -3,7 +3,7 @@ name: Terraform Apply
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   apply:
@@ -31,8 +31,35 @@ jobs:
           url: https://hashi-vault.tailnet-047c.ts.net:8200
           role: gha_rmb938_tf_hashicorp_vault
           method: jwt
+          path: jwt-gha
           exportToken: true
 
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.9.3"
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check -diff
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Plan
+        env:
+          TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          TAILSCALE_OAUTH_CLIENT_SECRET: ${{ secrets.TS_OAUTH_SECRET }}
+        run: terraform plan -out tfplan
+
+      - name: Terraform Apply
+        env:
+          TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          TAILSCALE_OAUTH_CLIENT_SECRET: ${{ secrets.TS_OAUTH_SECRET }}
+        run: terraform apply tfplan
+
+      # https://github.com/hashicorp/vault-action/issues/427
+      - name: Revoke Vault Token
+        if: always()
+        run: |
+          curl -XPOST -sv -H "X-Vault-Token: ${{ env.VAULT_TOKEN }}" https://hashi-vault.tailnet-047c.ts.net:8200/v1/auth/token/revoke-self 
