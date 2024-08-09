@@ -5,11 +5,13 @@ locals {
 }
 
 resource "vault_cert_auth_backend_role" "cert" {
-  name                 = "foo"
+  for_each = local.tailscale_servers
+
+  name                 = each.key.name
   certificate          = file("${path.module}/le_isrg_root_x2.pem")
   backend              = vault_auth_backend.cert.path
-  allowed_common_names = ["woo.tailnet-047c.ts.net"]
-  display_name         = "tailscale_machine_woo"
+  allowed_common_names = [each.key.name]
+  display_name         = each.key.name
   token_policies       = ["default"]
-  token_bound_cidrs    = ["1.1.1.1"]
+  token_bound_cidrs    = each.key.addresses
 }
