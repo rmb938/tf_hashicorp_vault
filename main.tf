@@ -6,3 +6,7 @@ terraform {
     }
   }
 }
+
+module "auth" {
+  source = "./auth"
+}
