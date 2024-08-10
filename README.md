@@ -24,12 +24,24 @@ Terraform to manage Hashicorp Vault
 * Create a policy for this github repo
   ```bash
   vault policy write gha_rmb938_tf_hashicorp_vault -<<EOF
+  path "auth/token/create" {
+    capabilities = ["update"]
+  }
+
   path "sys/policy/*" {
     capabilities = ["create", "read", "update", "delete"]
   }
 
   path "sys/auth/*" {
     capabilities = ["sudo", "create", "read", "update", "delete"]
+  }
+
+  path "sys/mounts/*" {
+    capabilities = ["create", "read", "delete"]
+  }
+
+  path "auth/*" {
+    capabilities = ["create", "read", "update", "delete"]
   }
   EOF
   ```

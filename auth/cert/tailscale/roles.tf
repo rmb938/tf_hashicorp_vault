@@ -15,5 +15,5 @@ resource "vault_cert_auth_backend_role" "tailscale_server_role" {
   allowed_common_names = [each.value.name]
   display_name         = each.value.name
   token_policies       = concat(["default"], [for tag in each.value.tags : "ts_${trimprefix(tag, "tag:hvpolicy-")}" if startswith(tag, "tag:hvpolicy-")])
-  token_bound_cidrs    = each.value.addresses
+  token_bound_cidrs    = concat([for ip in each.value.addresses : "${ip}/32" if strcontains(ip, ".")], [for ip in each.value.addresses : "${ip}/128" if strcontains(ip, ":")])
 }
