@@ -21,7 +21,7 @@ Terraform to manage Hashicorp Vault
   }
   EOF
   ```
-* Create a policy for this github repo
+* Create a policy for this github repo TODO: This will forever grow, we need a better way...
   ```bash
   vault policy write gha_rmb938_tf_hashicorp_vault -<<EOF
   path "auth/token/create" {
@@ -51,14 +51,14 @@ Terraform to manage Hashicorp Vault
   path "pki_consul_root/config/issuers" {
     capabilities = ["create", "read", "update"]
   }
-  path "pki_consul_root/issuers/generate/root/internal" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_consul_root/issuer/+" {
-    capabilities = ["create", "read", "update"]
-  }
 
-  path "pki_consul_intermediate_0/intermediate/set-signed" {
+  path "pki_consul_connect_root/config/issuers" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_consul_connect_root/issuers/generate/root/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_consul_connect_root/issuer/+" {
     capabilities = ["create", "read", "update"]
   }
   EOF
