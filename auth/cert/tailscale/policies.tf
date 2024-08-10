@@ -33,6 +33,7 @@ path "auth/token/lookup-self" {
 EOT
 }
 
+# https://developer.hashicorp.com/consul/tutorials/operate-consul/vault-pki-consul-connect-ca#create-vault-policies
 resource "vault_policy" "ts_hashiconsulserver" {
   name = "ts_hashiconsulserver"
 
