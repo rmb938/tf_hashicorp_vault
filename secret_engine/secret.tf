@@ -6,7 +6,7 @@ resource "vault_mount" "secret" {
   }
 }
 
-resource "vault_kv_secret_backend_v2" "example" {
+resource "vault_kv_secret_backend_v2" "secret" {
   mount        = vault_mount.secret.path
   max_versions = 5
 }
