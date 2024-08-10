@@ -37,5 +37,10 @@ path "auth/token/renew-self" {
 path "auth/token/lookup-self" {
   capabilities = [ "read" ]
 }
+
+
+path "pki_consul_rpc_intermediate/issue/*" {
+  capabilities = ["create"]
+}
 EOT
 }

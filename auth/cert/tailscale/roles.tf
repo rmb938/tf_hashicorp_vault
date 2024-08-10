@@ -9,8 +9,12 @@ locals {
 resource "vault_cert_auth_backend_role" "tailscale_server_role" {
   for_each = local.tailscale_servers
 
-  name                 = each.value.name
-  certificate          = "${file("${path.module}/le_isrg_root_x1.pem")}${file("${path.module}/le_isrg_root_x2.pem")}${file("${path.module}/le_e5.pem")}${file("${path.module}/le_e6.pem")}"
+  name = each.value.name
+
+  # TODO: We probably only need e5 & e6
+  certificate = "${file("${path.module}/le_isrg_root_x1.pem")}${file("${path.module}/le_isrg_root_x2.pem")}${file("${path.module}/le_e5.pem")}${file("${path.module}/le_e6.pem")}"
+
+
   backend              = vault_auth_backend.cert.path
   allowed_common_names = [each.value.name]
   display_name         = each.value.name

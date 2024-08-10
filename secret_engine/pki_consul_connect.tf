@@ -14,6 +14,8 @@ resource "vault_pki_secret_backend_root_cert" "pki_consul_connect_root" {
   type        = "internal"
   common_name = "Consul Connect Root"
   ttl         = vault_mount.pki_consul_connect_root.max_lease_ttl_seconds
+  key_type    = "ec"
+  key_bits    = 256
 
   lifecycle {
     prevent_destroy = true
