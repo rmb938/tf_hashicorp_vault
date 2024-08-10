@@ -13,29 +13,23 @@ resource "vault_policy" "ts_hashiconsulserver" {
   name = "ts_hashiconsulserver"
 
   policy = <<EOT
-path "/sys/mounts/pki_consul_root" {
+path "sys/mounts/pki_consul_root" {
   capabilities = [ "read" ]
 }
-path "/sys/mounts/pki_consul_intermediate_0" {
+path "sys/mounts/pki_consul_intermediate_0" {
   capabilities = [ "read" ]
 }
-path "/sys/mounts/pki_consul_intermediate_0/tune" {
+path "sys/mounts/pki_consul_intermediate_0/tune" {
   capabilities = [ "update" ]
 }
-path "/pki_consul_root/" {
+path "pki_consul_root/" {
   capabilities = [ "read" ]
 }
-path "/pki_consul_root/root/sign-intermediate" {
+path "pki_consul_root/root/sign-intermediate" {
   capabilities = [ "update" ]
 }
-path "/pki_consul_intermediate_0/*" {
+path "pki_consul_intermediate_0/*" {
   capabilities = [ "create", "read", "update", "delete", "list" ]
-}
-path "auth/token/renew-self" {
-  capabilities = [ "update" ]
-}
-path "auth/token/lookup-self" {
-  capabilities = [ "read" ]
 }
 EOT
 }
