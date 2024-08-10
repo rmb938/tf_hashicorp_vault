@@ -48,6 +48,10 @@ Terraform to manage Hashicorp Vault
     capabilities = ["create", "read", "update"]
   }
 
+  path "pki_consul_root/config/issuers" {
+    capabilities = ["create", "read", "update"]
+  }
+
   path "pki_consul_connect_root/config/issuers" {
     capabilities = ["create", "read", "update"]
   }
