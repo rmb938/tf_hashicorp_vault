@@ -48,27 +48,18 @@ Terraform to manage Hashicorp Vault
     capabilities = ["create", "read", "update"]
   }
 
-
-  path "pki_consul_root/keys/*" {
-    capabilities = ["create", "read", "update", "delete"]
-  }
-  path "pki_consul_root/root/*" {
+  path "pki_consul_root/config/issuers" {
     capabilities = ["create", "read", "update"]
   }
-  path "pki_consul_root/issuers/*" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_consul_root/intermediate/*" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_consul_root/config/+" {
+  path "pki_consul_root/issuers/generate/root/internal" {
     capabilities = ["create", "read", "update"]
   }
   path "pki_consul_root/issuer/+" {
-    capabilities = ["create", "read", "update", "delete"]
+    capabilities = ["create", "read", "update"]
   }
-  path "pki_consul_root/roles/*" {
-    capabilities = ["create", "read", "update", "delete"]
+
+  path "pki_consul_intermediate_0/intermediate/set-signed" {
+    capabilities = ["create", "read", "update"]
   }
   EOF
   ```
