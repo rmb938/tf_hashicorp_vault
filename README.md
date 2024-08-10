@@ -61,7 +61,7 @@ Terraform to manage Hashicorp Vault
   path "pki_consul_root/intermediate/*" {
     capabilities = ["create", "read", "update"]
   }
-  path "pki_consul_root/config/ca" {
+  path "pki_consul_root/config/+" {
     capabilities = ["create", "read", "update"]
   }
   path "pki_consul_root/issuer/+" {
