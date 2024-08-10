@@ -62,7 +62,7 @@ resource "vault_kv_secret_v2" "consul_pki_consul_rpc_intermediates" {
   name  = "consul/pki_consul_rpc_intermediates"
   data_json = jsonencode(
     {
-      pki_consul_rpc_intermediates = pki_consul_rpc_intermediates,
+      pki_consul_rpc_intermediates = local.pki_consul_rpc_intermediates,
     }
   )
 
@@ -86,7 +86,7 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "pki_consul_rpc_in
 resource "vault_pki_secret_backend_root_sign_intermediate" "pki_consul_rpc_intermediate" {
   count = local.pki_consul_rpc_intermediates
 
-  backend     = vault_mount.root.path
+  backend     = vault_mount.pki_consul_rpc_root.path
   csr         = vault_pki_secret_backend_intermediate_cert_request.pki_consul_rpc_intermediate[count.index].csr
   common_name = vault_pki_secret_backend_intermediate_cert_request.pki_consul_rpc_intermediate[count.index].common_name
   ttl         = vault_mount.pki_consul_rpc_intermediate.max_lease_ttl_seconds
