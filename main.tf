@@ -19,3 +19,7 @@ terraform {
 module "auth" {
   source = "./auth"
 }
+
+module "secret_engine" {
+  source = "./secret_engine"
+}
