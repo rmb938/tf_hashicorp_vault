@@ -16,10 +16,10 @@ resource "vault_policy" "ts_hashiconsulserver" {
 path "/sys/mounts/pki_consul_root" {
   capabilities = [ "read" ]
 }
-path "/sys/mounts/pki_consul_intermediate_0" {
+path "/sys/mounts/pki_consul_intermediate" {
   capabilities = [ "read" ]
 }
-path "/sys/mounts/pki_consul_intermediate_0/tune" {
+path "/sys/mounts/pki_consul_intermediate/tune" {
   capabilities = [ "update" ]
 }
 path "/pki_consul_root/" {
@@ -28,7 +28,7 @@ path "/pki_consul_root/" {
 path "/pki_consul_root/root/sign-intermediate" {
   capabilities = [ "update" ]
 }
-path "/pki_consul_intermediate_0/*" {
+path "/pki_consul_intermediate/*" {
   capabilities = [ "create", "read", "update", "delete", "list" ]
 }
 path "auth/token/renew-self" {
