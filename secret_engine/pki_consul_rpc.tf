@@ -1,3 +1,26 @@
+resource "random_password" "consul_encrypt" {
+  length      = 22
+  special     = true
+  min_lower   = 1
+  min_upper   = 1
+  min_special = 1
+}
+
+resource "vault_kv_secret" "consul_encrypt" {
+  path = "${vault_mount.secret.path}/consul/encrypt_key"
+  data_json = jsonencode(
+    {
+      key = base64encode(random_password.consul_encrypt.result)
+    }
+  )
+
+  depends_on = [vault_mount.secret]
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 # Root
 resource "vault_mount" "pki_consul_rpc_root" {
   path                  = "pki_consul_rpc_root"
@@ -66,6 +89,8 @@ resource "vault_kv_secret" "consul_pki_consul_rpc_intermediates" {
       pki_consul_rpc_intermediates = local.pki_consul_rpc_intermediates - 1, // sub 1 cause count starts at 0
     }
   )
+
+  depends_on = [vault_mount.secret]
 
   lifecycle {
     prevent_destroy = true
