@@ -92,8 +92,10 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "pki_consul_rpc_inter
 }
 
 resource "vault_pki_secret_backend_intermediate_set_signed" "pki_consul_rpc_intermediate" {
+  count = local.pki_consul_rpc_intermediates
+
   backend     = vault_mount.pki_consul_rpc_intermediate.path
-  certificate = vault_pki_secret_backend_root_sign_intermediate.pki_consul_rpc_intermediate[0].certificate
+  certificate = vault_pki_secret_backend_root_sign_intermediate.pki_consul_rpc_intermediate[count.index].certificate
 
   lifecycle {
     prevent_destroy = true
