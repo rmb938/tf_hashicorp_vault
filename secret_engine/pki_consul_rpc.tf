@@ -89,10 +89,6 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "pki_consul_rpc_inter
   csr         = vault_pki_secret_backend_intermediate_cert_request.pki_consul_rpc_intermediate[count.index].csr
   common_name = vault_pki_secret_backend_intermediate_cert_request.pki_consul_rpc_intermediate[count.index].common_name
   ttl         = vault_mount.pki_consul_rpc_intermediate.max_lease_ttl_seconds
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "vault_pki_secret_backend_intermediate_set_signed" "pki_consul_rpc_intermediate" {
