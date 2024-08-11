@@ -40,7 +40,7 @@ path "auth/token/lookup-self" {
 
 
 path "pki_consul_rpc_intermediate/issue/*" {
-  capabilities = ["create"]
+  capabilities = ["update"]
 }
 EOT
 }
