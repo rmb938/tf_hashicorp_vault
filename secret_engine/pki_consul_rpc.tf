@@ -133,8 +133,8 @@ resource "vault_pki_secret_backend_role" "role" {
   backend             = vault_mount.pki_consul_rpc_intermediate.path
   name                = "pki_consul_rpc_intermediate_${count.index}"
   issuer_ref          = vault_pki_secret_backend_intermediate_set_signed.pki_consul_rpc_intermediate[count.index].imported_issuers[0]
-  ttl                 = "90d"
-  max_ttl             = "90d"
+  ttl                 = "7776000" # 90 days
+  max_ttl             = "7776000"
   allow_ip_sans       = false
   allowed_domains     = ["server.us-homelab1.consul"] # TODO: hard coding this for now
   allow_bare_domains  = true
