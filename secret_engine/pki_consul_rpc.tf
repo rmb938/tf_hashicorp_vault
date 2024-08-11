@@ -80,10 +80,6 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "pki_consul_rpc_in
   common_name = "Consul RPC Intermediate ${count.index}"
   key_type    = "ec"
   key_bits    = 256
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "vault_pki_secret_backend_root_sign_intermediate" "pki_consul_rpc_intermediate" {
