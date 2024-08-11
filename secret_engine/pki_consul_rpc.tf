@@ -81,22 +81,6 @@ locals {
   pki_consul_rpc_intermediates = 1
 }
 
-# write pki_consul_rpc_intermediates to a kv so servers and clients can figure out what intermediates to trust
-resource "vault_kv_secret" "consul_pki_consul_rpc_intermediates" {
-  path = "${vault_mount.secret.path}/consul/pki_consul_rpc_intermediates"
-  data_json = jsonencode(
-    {
-      pki_consul_rpc_intermediates = local.pki_consul_rpc_intermediates - 1, // sub 1 cause count starts at 0
-    }
-  )
-
-  depends_on = [vault_mount.secret]
-
-  lifecycle {
-    prevent_destroy = true
-  }
-}
-
 resource "vault_pki_secret_backend_key" "pki_consul_rpc_intermediate" {
   count = local.pki_consul_rpc_intermediates
 
@@ -155,4 +139,20 @@ resource "vault_pki_secret_backend_role" "role" {
   generate_lease      = false
   no_store            = true
   not_before_duration = "30s"
+}
+
+# write all chains so consul clients can trust all the intermediates
+resource "vault_kv_secret" "consul_pki_consul_rpc_chains" {
+  path = "${vault_mount.secret.path}/consul/pki_consul_rpc_chains"
+  data_json = jsonencode(
+    {
+      chains = join("\n", [for signedCert in vault_pki_secret_backend_root_sign_intermediate.pki_consul_rpc_intermediate : signedCert.certificate_bundle])
+    }
+  )
+
+  depends_on = [vault_mount.secret]
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
