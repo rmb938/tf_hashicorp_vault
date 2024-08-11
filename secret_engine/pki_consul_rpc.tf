@@ -97,14 +97,22 @@ resource "vault_kv_secret" "consul_pki_consul_rpc_intermediates" {
   }
 }
 
+resource "vault_pki_secret_backend_key" "pki_consul_rpc_intermediate" {
+  count = local.pki_consul_rpc_intermediates
+
+  backend  = vault_mount.pki_consul_rpc_intermediate.path
+  type     = vault_pki_secret_backend_root_cert.pki_consul_rpc_root.type
+  key_type = "ec"
+  key_bits = 256
+}
+
 resource "vault_pki_secret_backend_intermediate_cert_request" "pki_consul_rpc_intermediate" {
   count = local.pki_consul_rpc_intermediates
 
-  backend     = vault_mount.pki_consul_rpc_intermediate.path
-  type        = vault_pki_secret_backend_root_cert.pki_consul_rpc_root.type
-  common_name = "Consul RPC Intermediate ${count.index}"
-  key_type    = "ec"
-  key_bits    = 256
+  backend        = vault_mount.pki_consul_rpc_intermediate.path
+  type           = vault_pki_secret_backend_root_cert.pki_consul_rpc_root.type
+  common_name    = "Consul RPC Intermediate ${count.index}"
+  managed_key_id = vault_pki_secret_backend_key.pki_consul_rpc_intermediate[count.index].key_id
 }
 
 resource "vault_pki_secret_backend_root_sign_intermediate" "pki_consul_rpc_intermediate" {
