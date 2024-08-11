@@ -86,17 +86,19 @@ resource "vault_pki_secret_backend_key" "pki_consul_rpc_intermediate" {
 
   backend  = vault_mount.pki_consul_rpc_intermediate.path
   type     = vault_pki_secret_backend_root_cert.pki_consul_rpc_root.type
-  key_type = "ec"
-  key_bits = 256
+  key_type = vault_pki_secret_backend_root_cert.pki_consul_rpc_root.key_type
+  key_bits = vault_pki_secret_backend_root_cert.pki_consul_rpc_root.key_bits
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "pki_consul_rpc_intermediate" {
   count = local.pki_consul_rpc_intermediates
 
-  backend        = vault_mount.pki_consul_rpc_intermediate.path
-  type           = vault_pki_secret_backend_root_cert.pki_consul_rpc_root.type
-  common_name    = "Consul RPC Intermediate ${count.index}"
-  managed_key_id = vault_pki_secret_backend_key.pki_consul_rpc_intermediate[count.index].key_id
+  backend     = vault_mount.pki_consul_rpc_intermediate.path
+  type        = "existing"
+  common_name = "Consul RPC Intermediate ${count.index}"
+  key_ref     = vault_pki_secret_backend_key.pki_consul_rpc_intermediate[count.index].key_id
+  key_type    = vault_pki_secret_backend_key.pki_consul_rpc_intermediate.key_type
+  key_bits    = pki_consul_rpc_intermediates.pki_consul_rpc_intermediate.key_bits
 }
 
 resource "vault_pki_secret_backend_root_sign_intermediate" "pki_consul_rpc_intermediate" {
