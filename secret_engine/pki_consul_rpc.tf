@@ -1,3 +1,26 @@
+resource "random_password" "consul_encrypt" {
+  length      = 22
+  special     = true
+  min_lower   = 1
+  min_upper   = 1
+  min_special = 1
+}
+
+resource "vault_kv_secret" "consul_encrypt" {
+  path = "${vault_mount.secret.path}/consul/encrypt_key"
+  data_json = jsonencode(
+    {
+      key = base64encode(random_password.consul_encrypt.result)
+    }
+  )
+
+  depends_on = [vault_mount.secret]
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 # Root
 resource "vault_mount" "pki_consul_rpc_root" {
   path                  = "pki_consul_rpc_root"
@@ -67,6 +90,8 @@ resource "vault_kv_secret" "consul_pki_consul_rpc_intermediates" {
     }
   )
 
+  depends_on = [vault_mount.secret]
+
   lifecycle {
     prevent_destroy = true
   }
@@ -108,8 +133,8 @@ resource "vault_pki_secret_backend_role" "role" {
   backend             = vault_mount.pki_consul_rpc_intermediate.path
   name                = "pki_consul_rpc_intermediate_${count.index}"
   issuer_ref          = vault_pki_secret_backend_intermediate_set_signed.pki_consul_rpc_intermediate[count.index].imported_issuers[0]
-  ttl                 = "90d"
-  max_ttl             = "90d"
+  ttl                 = "7776000" # 90 days
+  max_ttl             = "7776000"
   allow_ip_sans       = false
   allowed_domains     = ["server.us-homelab1.consul"] # TODO: hard coding this for now
   allow_bare_domains  = true

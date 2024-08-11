@@ -79,5 +79,8 @@ Terraform to manage Hashicorp Vault
   path "pki_consul_rpc_intermediate/intermediate/set-signed" {
     capabilities = ["create", "read", "update"]
   }
+  path "pki_consul_rpc_intermediate/roles/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
   EOF
   ```
