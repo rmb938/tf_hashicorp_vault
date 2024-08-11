@@ -48,10 +48,6 @@ Terraform to manage Hashicorp Vault
     capabilities = ["create", "read", "update"]
   }
 
-  path "pki_consul_root/config/issuers" {
-    capabilities = ["create", "read", "update"]
-  }
-
   path "pki_consul_connect_root/config/issuers" {
     capabilities = ["create", "read", "update"]
   }
@@ -59,6 +55,28 @@ Terraform to manage Hashicorp Vault
     capabilities = ["create", "read", "update"]
   }
   path "pki_consul_connect_root/issuer/+" {
+    capabilities = ["create", "read", "update"]
+  }
+
+  path "secret/consul/pki_consul_rpc_intermediates" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_consul_rpc_root/config/issuers" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_consul_rpc_root/issuers/generate/root/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_consul_rpc_root/issuer/+" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_consul_rpc_root/root/sign-intermediate" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_consul_rpc_intermediate/issuers/generate/intermediate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_consul_rpc_intermediate/intermediate/set-signed" {
     capabilities = ["create", "read", "update"]
   }
   EOF
