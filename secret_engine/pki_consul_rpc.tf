@@ -97,8 +97,8 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "pki_consul_rpc_in
   type        = "existing"
   common_name = "Consul RPC Intermediate ${count.index}"
   key_ref     = vault_pki_secret_backend_key.pki_consul_rpc_intermediate[count.index].key_id
-  key_type    = vault_pki_secret_backend_key.pki_consul_rpc_intermediate.key_type
-  key_bits    = pki_consul_rpc_intermediates.pki_consul_rpc_intermediate.key_bits
+  key_type    = vault_pki_secret_backend_key.pki_consul_rpc_intermediate[count.index].key_type
+  key_bits    = vault_pki_secret_backend_key.pki_consul_rpc_intermediate[count.index].key_bits
 }
 
 resource "vault_pki_secret_backend_root_sign_intermediate" "pki_consul_rpc_intermediate" {
