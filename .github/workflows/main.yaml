@@ -21,8 +21,7 @@ jobs:
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-          tags: tag:githubactions
-          version: "1.70.0"
+          tags: tag:githubactions-tf-hashicorp-vault
 
       - name: Auth GCP
         uses: 'google-github-actions/auth@v2'
@@ -41,7 +40,7 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: "1.9.3"
+          terraform_version: "1.10.3"
 
       - name: Terraform fmt
         id: fmt
