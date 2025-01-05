@@ -17,7 +17,7 @@ Terraform to manage Hashicorp Vault
     "role_type": "jwt",
     "policies": ["default", "gha_rmb938_tf_hashicorp_vault"],
     "ttl": "1h",
-    "bound_claims": { "repository_id": ["X"] }
+    "bound_claims": { "repository_id": ["840079927"] }
   }
   EOF
   ```

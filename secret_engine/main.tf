@@ -3,9 +3,5 @@ terraform {
     vault = {
       source = "hashicorp/vault"
     }
-
-    tailscale = {
-      source = "tailscale/tailscale"
-    }
   }
 }
