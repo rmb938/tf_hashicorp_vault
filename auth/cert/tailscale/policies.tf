@@ -16,6 +16,9 @@ resource "vault_policy" "ts_hashiconsulserver" {
   name = "ts_hashiconsulserver"
 
   policy = <<EOT
+path "secret/consul/management_token" {
+  capabilities = ["read"]
+}
 path "/sys/mounts/pki_consul_connect_root" {
   capabilities = [ "read" ]
 }

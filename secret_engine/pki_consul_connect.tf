@@ -45,7 +45,7 @@ resource "vault_pki_secret_backend_config_issuers" "pki_consul_connect_root" {
 resource "vault_mount" "pki_consul_connect_intermediate" {
   path                  = "pki_consul_connect_intermediate"
   type                  = "pki"
-  max_lease_ttl_seconds = "31556952" # 1 year
+  max_lease_ttl_seconds = "31536000" # 365 days
 
   lifecycle {
     prevent_destroy = true
