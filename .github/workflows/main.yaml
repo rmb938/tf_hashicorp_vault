@@ -31,13 +31,17 @@ jobs:
       - uses: smallstep/action-install-step-cli@main
 
       - name: Bootstrap Step CLI
-        run: sudo step ca bootstrap --install --ca-url https://cuboid-topi.rmb1993-gmail-com.ca.smallstep.com --fingerprint eb136a5118931a2306964469705323521dda8c43d26ec67e1c5508eb123f9c70
+        run: |
+          sudo step ca bootstrap --install --ca-url https://cuboid-topi.rmb1993-gmail-com.ca.smallstep.com --fingerprint eb136a5118931a2306964469705323521dda8c43d26ec67e1c5508eb123f9c70
+          curl https://hashi-vault-1.tailnet-047c.ts.net:8200/v1/sys/health\?standbyok=true | jq .
+          echo "STEP_CA=$(sudo cat /root/.step/certs/root_ca.crt | base64 -w 0)" >> $GITHUB_ENV
 
       - name: Import Secrets
         id: import-secrets
         uses: hashicorp/vault-action@v3
         with:
           url: https://hashi-vault.tailnet-047c.ts.net:8200
+          caCertificate: ${{ env.STEP_CA }}
           role: gha_rmb938_tf_hashicorp_vault
           method: jwt
           path: jwt-gha
