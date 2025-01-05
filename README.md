@@ -85,6 +85,9 @@ Terraform to manage Hashicorp Vault
   path "pki_consul_rpc_intermediate/issuers/generate/intermediate/internal" {
     capabilities = ["create", "read", "update"]
   }
+  path "pki_consul_rpc_intermediate/issuers/generate/intermediate/existing" {
+    capabilities = ["create", "read", "update"]
+  }
   path "pki_consul_rpc_intermediate/intermediate/set-signed" {
     capabilities = ["create", "read", "update"]
   }
