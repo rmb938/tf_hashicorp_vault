@@ -63,3 +63,9 @@ jobs:
           TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           TAILSCALE_OAUTH_CLIENT_SECRET: ${{ secrets.TS_OAUTH_SECRET }}
         run: terraform plan -out tfplan
+
+      # https://github.com/hashicorp/vault-action/issues/427
+      - name: Revoke Vault Token
+        if: always()
+        run: |
+          curl -XPOST -sv -H "X-Vault-Token: ${{ env.VAULT_TOKEN }}" https://hashi-vault-1.tailnet-047c.ts.net:8200/v1/auth/token/revoke-self 
