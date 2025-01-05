@@ -61,6 +61,9 @@ Terraform to manage Hashicorp Vault
   path "secret/consul/encrypt_key" {
     capabilities = ["create", "read", "update"]
   }
+  path "secret/consul/management_token" {
+    capabilities = ["create", "read", "update"]
+  }
   path "secret/consul/pki_consul_rpc_chains" {
     capabilities = ["create", "read", "update"]
   }
