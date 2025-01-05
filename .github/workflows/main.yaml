@@ -40,7 +40,7 @@ jobs:
         id: import-secrets
         uses: hashicorp/vault-action@v3
         with:
-          url: https://hashi-vault.tailnet-047c.ts.net:8200
+          url: https://hashi-vault-1.tailnet-047c.ts.net:8200
           caCertificate: ${{ env.STEP_CA }}
           role: gha_rmb938_tf_hashicorp_vault
           method: jwt
@@ -75,4 +75,4 @@ jobs:
       - name: Revoke Vault Token
         if: always()
         run: |
-          curl -XPOST -sv -H "X-Vault-Token: ${{ env.VAULT_TOKEN }}" https://hashi-vault.tailnet-047c.ts.net:8200/v1/auth/token/revoke-self 
+          curl -XPOST -sv -H "X-Vault-Token: ${{ env.VAULT_TOKEN }}" https://hashi-vault-1.tailnet-047c.ts.net:8200/v1/auth/token/revoke-self 
