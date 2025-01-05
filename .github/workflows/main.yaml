@@ -28,6 +28,11 @@ jobs:
         with:
           workload_identity_provider: 'projects/455628669441/locations/global/workloadIdentityPools/github-actions/providers/gha-tf-hashicorp-vault'
 
+      - uses: smallstep/action-install-step-cli@v1
+
+      - name: Bootstrap Step CLI
+        run: sudo step ca bootstrap --install --ca-url https://cuboid-topi.rmb1993-gmail-com.ca.smallstep.com --fingerprint eb136a5118931a2306964469705323521dda8c43d26ec67e1c5508eb123f9c70
+
       - name: Import Secrets
         id: import-secrets
         uses: hashicorp/vault-action@v3
