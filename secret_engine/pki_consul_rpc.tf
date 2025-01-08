@@ -107,7 +107,7 @@ resource "vault_pki_secret_backend_role" "role" {
   ttl                 = "7776000" # 90 days
   max_ttl             = "7776000"
   allow_ip_sans       = false
-  allowed_domains     = ["server.us-homelab1.consul"] # TODO: hard coding this for now
+  allowed_domains     = ["server.hl-us-homelab1.consul"] # TODO: hard coding this for now
   allow_bare_domains  = true
   allow_subdomains    = false
   enforce_hostnames   = true
