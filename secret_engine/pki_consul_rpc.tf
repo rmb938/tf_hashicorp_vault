@@ -15,7 +15,7 @@ resource "vault_pki_secret_backend_root_cert" "pki_consul_rpc_root" {
   common_name = "Consul RPC Root"
   ttl         = vault_mount.pki_consul_rpc_root.max_lease_ttl_seconds
   key_type    = "ec"
-  key_bits    = 256
+  key_bits    = 384
 
   lifecycle {
     prevent_destroy = true
@@ -45,7 +45,7 @@ resource "vault_pki_secret_backend_config_issuers" "pki_consul_rpc_root" {
 resource "vault_mount" "pki_consul_rpc_intermediate" {
   path                  = "pki_consul_rpc_intermediate"
   type                  = "pki"
-  max_lease_ttl_seconds = "157784760" # 5 years
+  max_lease_ttl_seconds = "94670856" # 3 years
 
   lifecycle {
     prevent_destroy = true
@@ -98,7 +98,7 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "pki_consul_rpc_inte
   }
 }
 
-resource "vault_pki_secret_backend_role" "role" {
+resource "vault_pki_secret_backend_role" "pki_consul_rpc_intermediate" {
   count = local.pki_consul_rpc_intermediates
 
   backend             = vault_mount.pki_consul_rpc_intermediate.path

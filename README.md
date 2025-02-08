@@ -97,5 +97,39 @@ Terraform to manage Hashicorp Vault
   path "pki_consul_rpc_intermediate/roles/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+
+  path "secret/haproxy/pki_step_x5c_haproxy_chains" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_step_x5c_haproxy_root/config/issuers" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_step_x5c_haproxy_root/issuers/generate/root/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_step_x5c_haproxy_root/issuer/+" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_step_x5c_haproxy_root/root/sign-intermediate" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_step_x5c_haproxy_intermediate/keys/generate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_step_x5c_haproxy_intermediate/key/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_step_x5c_haproxy_intermediate/issuers/generate/intermediate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_step_x5c_haproxy_intermediate/issuers/generate/intermediate/existing" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_step_x5c_haproxy_intermediate/intermediate/set-signed" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_step_x5c_haproxy_intermediate/roles/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
   EOF
   ```

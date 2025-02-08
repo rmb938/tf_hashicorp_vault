@@ -1,3 +1,3 @@
-module "tailscale" {
-  source = "./tailscale"
+module "step" {
+  source = "./step"
 }
