@@ -81,7 +81,7 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "pki_step_x5c_hapr
 resource "vault_pki_secret_backend_root_sign_intermediate" "pki_step_x5c_haproxy_intermediate" {
   count = local.pki_step_x5c_haproxy_intermediates
 
-  backend     = vault_mount.pki_step_x5c_haproxy_intermediate.path
+  backend     = vault_mount.vault_pki_secret_backend_root_cert.path
   csr         = vault_pki_secret_backend_intermediate_cert_request.pki_step_x5c_haproxy_intermediate[count.index].csr
   common_name = vault_pki_secret_backend_intermediate_cert_request.pki_step_x5c_haproxy_intermediate[count.index].common_name
   ttl         = vault_mount.pki_step_x5c_haproxy_intermediate.max_lease_ttl_seconds
