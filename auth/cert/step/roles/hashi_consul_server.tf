@@ -3,7 +3,7 @@ resource "vault_cert_auth_backend_role" "hashi_consule_server" {
 
   certificate = file("${path.module}/smallstep-homelab-prod.crt")
 
-  backend = backend.path
+  backend = var.backend.path
   allowed_common_names = [
     "consul-server-1.us-homelab1.hl.rmb938.me",
     "consul-server-2.us-homelab1.hl.rmb938.me",
