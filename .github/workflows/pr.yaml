@@ -27,11 +27,20 @@ jobs:
         with:
           workload_identity_provider: 'projects/455628669441/locations/global/workloadIdentityPools/github-actions/providers/gha-tf-hashicorp-vault'
 
+      - uses: smallstep/action-install-step-cli@main
+
+      - name: Bootstrap Step CLI
+        run: |
+          sudo step ca bootstrap --install --ca-url https://hl-us-homelab1-step-ca.tailnet-047c.ts.net --fingerprint 111301fb085dfc83f5390c0be68df3d68f5584853df0cb4c442383c33f2bd83a
+          curl https://hl-us-homelab1-hashi-vault-1.tailnet-047c.ts.net:8200/v1/sys/health\?standbyok=true | jq .
+          echo "STEP_CA=$(sudo cat /root/.step/certs/root_ca.crt | base64 -w 0)" >> $GITHUB_ENV
+
       - name: Import Secrets
         id: import-secrets
         uses: hashicorp/vault-action@v3
         with:
-          url: https://hl-us-homelab1-hashi-vault-1.tailnet-047c.ts.net:8200
+          url: https://hl-us-homelab1-hashi-vault-1.tailnet-047c.ts.net:8200:8200
+          caCertificate: ${{ env.STEP_CA }}
           role: gha_rmb938_tf_hashicorp_vault
           method: jwt
           path: jwt-gha
