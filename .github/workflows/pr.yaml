@@ -39,7 +39,7 @@ jobs:
         id: import-secrets
         uses: hashicorp/vault-action@v3
         with:
-          url: https://hl-us-homelab1-hashi-vault-1.tailnet-047c.ts.net:8200:8200
+          url: https://hl-us-homelab1-hashi-vault-1.tailnet-047c.ts.net:8200
           caCertificate: ${{ env.STEP_CA }}
           role: gha_rmb938_tf_hashicorp_vault
           method: jwt
