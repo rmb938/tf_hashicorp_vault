@@ -43,3 +43,15 @@ resource "vault_kv_secret" "consul_management_token" {
     prevent_destroy = true
   }
 }
+
+resource "vault_consul_secret_backend" "consul" {
+  path        = "consul"
+  description = "Manages the Consul backend"
+
+  # Only giving one consul server since HAProxy isn't setup yet.
+  # We probably should use a keep-alived address eventually
+  scheme  = "https"
+  address = "hashi-consul-1.us-homelab1.hl.rmb938.me:8501"
+
+  token = base64encode(random_password.consul_management_token.result)
+}

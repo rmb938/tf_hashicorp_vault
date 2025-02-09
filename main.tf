@@ -15,11 +15,3 @@ terraform {
     bucket = "rmb-lab-tf_hashicorp_vault"
   }
 }
-
-module "auth" {
-  source = "./auth"
-}
-
-module "secret_engine" {
-  source = "./secret_engine"
-}

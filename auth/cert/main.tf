@@ -1,3 +1,0 @@
-module "step" {
-  source = "./step"
-}
