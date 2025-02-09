@@ -25,10 +25,10 @@ resource "vault_jwt_auth_backend_role" "gha_rmb938_tf_hashicorp_vault_apps" {
   role_name = "gha_rmb938_tf_hashicorp_vault_apps"
 
   user_claim      = "repository"
-  bound_audiences = "https://github.com/rmb938"
+  bound_audiences = ["https://github.com/rmb938"]
   role_type       = "jwt"
   token_policies  = ["default", vault_policy.gha_rmb938_tf_hashicorp_vault_apps.name]
-  token_ttl       = "1h"
+  token_ttl       = "3600" # 1h
   bound_claims = {
     repository_id = "929992146"
   }
