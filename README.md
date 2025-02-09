@@ -131,5 +131,9 @@ Terraform to manage Hashicorp Vault
   path "pki_step_x5c_haproxy_intermediate/roles/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+
+  path "consul/config/access" {
+    capabilities = ["create", "read", "update"]
+  }
   EOF
   ```
