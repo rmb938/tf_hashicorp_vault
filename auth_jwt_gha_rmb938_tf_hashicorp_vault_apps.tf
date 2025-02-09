@@ -21,7 +21,7 @@ EOT
 }
 
 resource "vault_jwt_auth_backend_role" "gha_rmb938_tf_hashicorp_vault_apps" {
-  backend   = "auth/jwt-gha"
+  backend   = "jwt-gha"
   role_name = "gha_rmb938_tf_hashicorp_vault_apps"
 
   user_claim      = "repository"
