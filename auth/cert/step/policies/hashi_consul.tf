@@ -1,6 +1,6 @@
 # https://developer.hashicorp.com/consul/tutorials/operate-consul/vault-pki-consul-connect-ca#create-vault-policies
-resource "vault_policy" "hashi_console_server" {
-  name = "step_hashi_console_server"
+resource "vault_policy" "hashi_consul" {
+  name = "step_hashi_consul"
 
   policy = <<EOT
 path "secret/consul/management_token" {
