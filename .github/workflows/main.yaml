@@ -32,9 +32,11 @@ jobs:
 
       - name: Bootstrap Step CLI
         run: |
-          sudo step ca bootstrap --install --ca-url https://hl-us-homelab1-step-ca.tailnet-047c.ts.net --fingerprint 111301fb085dfc83f5390c0be68df3d68f5584853df0cb4c442383c33f2bd83a
+          sudo step ca root /usr/local/share/ca-certificates/smallstep-homelab-prod.crt --ca-url https://hl-us-homelab1-step-ca.tailnet-047c.ts.net --fingerprint 111301fb085dfc83f5390c0be68df3d68f5584853df0cb4c442383c33f2bd83a
+          sudo chmod 0644 /usr/local/share/ca-certificates/smallstep-homelab-prod.crt
+          sudo update-ca-certificates
           curl https://hl-us-homelab1-hashi-vault-1.tailnet-047c.ts.net:8200/v1/sys/health\?standbyok=true | jq .
-          echo "STEP_CA=$(sudo cat /root/.step/certs/root_ca.crt | base64 -w 0)" >> $GITHUB_ENV
+          echo "STEP_CA=$(sudo cat /usr/local/share/ca-certificates/smallstep-homelab-prod.crt | base64 -w 0)" >> $GITHUB_ENV
 
       - name: Import Secrets
         id: import-secrets

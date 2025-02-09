@@ -1,3 +1,0 @@
-module "cert" {
-  source = "./cert"
-}
