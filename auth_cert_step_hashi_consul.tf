@@ -11,10 +11,6 @@ path "secret/consul/management_token" {
   capabilities = ["read"]
 }
 
-path "secret/consul/pki_consul_rpc_chains" {
-  capabilities = ["read"]
-}
-
 path "/sys/mounts/pki_consul_connect_root" {
   capabilities = [ "read" ]
 }
