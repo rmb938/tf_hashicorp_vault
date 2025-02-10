@@ -119,19 +119,3 @@ resource "vault_pki_secret_backend_role" "pki_consul_rpc_intermediate" {
   no_store            = true
   not_before_duration = "30s"
 }
-
-# write all chains so consul clients can trust all the intermediates
-resource "vault_kv_secret" "consul_pki_consul_rpc_chains" {
-  path = "${vault_mount.secret.path}/consul/pki_consul_rpc_chains"
-  data_json = jsonencode(
-    {
-      chains = join("\n", [for signedCert in vault_pki_secret_backend_root_sign_intermediate.pki_consul_rpc_intermediate : signedCert.certificate_bundle])
-    }
-  )
-
-  depends_on = [vault_mount.secret]
-
-  lifecycle {
-    prevent_destroy = true
-  }
-}
