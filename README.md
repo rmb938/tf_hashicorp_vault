@@ -64,9 +64,6 @@ Terraform to manage Hashicorp Vault
   path "secret/consul/management_token" {
     capabilities = ["create", "read", "update"]
   }
-  path "secret/consul/pki_consul_rpc_chains" {
-    capabilities = ["create", "read", "update"]
-  }
   path "pki_consul_rpc_root/config/issuers" {
     capabilities = ["create", "read", "update"]
   }
@@ -98,9 +95,6 @@ Terraform to manage Hashicorp Vault
     capabilities = ["create", "read", "update", "delete"]
   }
 
-  path "secret/haproxy/pki_step_x5c_haproxy_chains" {
-    capabilities = ["create", "read", "update"]
-  }
   path "pki_step_x5c_haproxy_root/config/issuers" {
     capabilities = ["create", "read", "update"]
   }
