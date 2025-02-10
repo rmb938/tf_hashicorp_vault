@@ -104,8 +104,8 @@ resource "vault_pki_secret_backend_role" "pki_step_x5c_haproxy_intermediate" {
   backend             = vault_mount.pki_step_x5c_haproxy_intermediate.path
   name                = "pki_step_x5c_haproxy_intermediate_${count.index}"
   issuer_ref          = vault_pki_secret_backend_intermediate_set_signed.pki_step_x5c_haproxy_intermediate[count.index].imported_issuers[0]
-  ttl                 = "7776000" # 90 days
-  max_ttl             = "7776000"
+  ttl                 = "3600" # 1 hour
+  max_ttl             = "3600"
   allow_ip_sans       = false
   allowed_domains     = ["haproxy.us-homelab1.hl.rmb938.me"] # TODO: hard coding this for now
   allow_bare_domains  = true
@@ -118,20 +118,4 @@ resource "vault_pki_secret_backend_role" "pki_step_x5c_haproxy_intermediate" {
   generate_lease      = false
   no_store            = true
   not_before_duration = "30s"
-}
-
-# write all chains so it's easy to copy into step x5c
-resource "vault_kv_secret" "pki_step_x5c_haproxy_chains" {
-  path = "${vault_mount.secret.path}/haproxy/pki_step_x5c_haproxy_chains"
-  data_json = jsonencode(
-    {
-      chains = join("\n", [for signedCert in vault_pki_secret_backend_root_sign_intermediate.pki_step_x5c_haproxy_intermediate : signedCert.certificate_bundle])
-    }
-  )
-
-  depends_on = [vault_mount.secret]
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
