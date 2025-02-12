@@ -98,12 +98,18 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "pki_step_x5c_haprox
   }
 }
 
-resource "vault_pki_secret_backend_role" "pki_step_x5c_haproxy_intermediate" {
-  count = local.pki_step_x5c_haproxy_intermediates
+resource "vault_pki_secret_backend_config_issuers" "config" {
+  backend = vault_mount.pki_step_x5c_haproxy_root.path
 
+  # Always set the default issuer to the latest one created
+  default                       = vault_pki_secret_backend_intermediate_set_signed.pki_step_x5c_haproxy_intermediate[pki_step_x5c_haproxy_intermediates-1].imported_issuers[0]
+  default_follows_latest_issuer = false
+}
+
+resource "vault_pki_secret_backend_role" "pki_step_x5c_haproxy_intermediate" {
   backend             = vault_mount.pki_step_x5c_haproxy_intermediate.path
-  name                = "pki_step_x5c_haproxy_intermediate_${count.index}"
-  issuer_ref          = vault_pki_secret_backend_intermediate_set_signed.pki_step_x5c_haproxy_intermediate[count.index].imported_issuers[0]
+  name                = "pki_step_x5c_haproxy_intermediate_default"
+  issuer_ref          = "default"
   ttl                 = "8640000" # 100 days, needs to be longer then the Step CA cert we are using this for
   max_ttl             = "8640000"
   allow_ip_sans       = false
