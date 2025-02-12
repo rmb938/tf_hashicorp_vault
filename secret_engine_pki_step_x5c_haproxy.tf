@@ -99,7 +99,7 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "pki_step_x5c_haprox
 }
 
 resource "vault_pki_secret_backend_config_issuers" "config" {
-  backend = vault_mount.pki_step_x5c_haproxy_root.path
+  backend = vault_mount.pki_step_x5c_haproxy_intermediate.path
 
   # Always set the default issuer to the latest one created
   default                       = vault_pki_secret_backend_intermediate_set_signed.pki_step_x5c_haproxy_intermediate[local.pki_step_x5c_haproxy_intermediates - 1].imported_issuers[0]
