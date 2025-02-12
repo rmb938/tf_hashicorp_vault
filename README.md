@@ -94,6 +94,9 @@ Terraform to manage Hashicorp Vault
   path "pki_consul_rpc_intermediate/roles/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+  path "pki_consul_rpc_intermediate/config/issuers" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
 
   path "pki_step_x5c_haproxy_root/config/issuers" {
     capabilities = ["create", "read", "update"]
@@ -121,6 +124,9 @@ Terraform to manage Hashicorp Vault
   }
   path "pki_step_x5c_haproxy_intermediate/intermediate/set-signed" {
     capabilities = ["create", "read", "update"]
+  }
+  path "pki_step_x5c_haproxy_intermediate/config/issuers" {
+    capabilities = ["create", "read", "update", "delete"]
   }
   path "pki_step_x5c_haproxy_intermediate/roles/+" {
     capabilities = ["create", "read", "update", "delete"]

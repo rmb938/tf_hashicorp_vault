@@ -98,12 +98,18 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "pki_consul_rpc_inte
   }
 }
 
-resource "vault_pki_secret_backend_role" "pki_consul_rpc_intermediate" {
-  count = local.pki_consul_rpc_intermediates
+resource "vault_pki_secret_backend_config_issuers" "pki_consul_rpc_intermediate" {
+  backend = vault_mount.pki_consul_rpc_intermediate.path
 
+  # Always set the default issuer to the latest one created
+  default                       = vault_pki_secret_backend_intermediate_set_signed.pki_consul_rpc_intermediate[local.pki_consul_rpc_intermediates - 1].imported_issuers[0]
+  default_follows_latest_issuer = false
+}
+
+resource "vault_pki_secret_backend_role" "pki_consul_rpc_intermediate" {
   backend             = vault_mount.pki_consul_rpc_intermediate.path
-  name                = "pki_consul_rpc_intermediate_${count.index}"
-  issuer_ref          = vault_pki_secret_backend_intermediate_set_signed.pki_consul_rpc_intermediate[count.index].imported_issuers[0]
+  name                = "pki_consul_rpc_intermediate_default"
+  issuer_ref          = "default"
   ttl                 = "7776000" # 90 days
   max_ttl             = "7776000"
   allow_ip_sans       = false
