@@ -1,3 +1,3 @@
 provider "vault" {
-  address = "https://hl-us-homelab1-hashi-vault-1.tailnet-047c.ts.net:8200"
+  address = "https://hashi-vault-1.us-homelab1.hl.rmb938.me:8200"
 }
