@@ -135,5 +135,73 @@ Terraform to manage Hashicorp Vault
   path "consul/config/access" {
     capabilities = ["create", "read", "update"]
   }
+
+  path "pki_openstack_postgres_patroni_root/config/issuers" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_patroni_root/issuers/generate/root/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_patroni_root/issuer/+" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_patroni_root/root/sign-intermediate" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_patroni_intermediate/keys/generate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_patroni_intermediate/key/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_openstack_postgres_patroni_intermediate/issuers/generate/intermediate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_patroni_intermediate/issuers/generate/intermediate/existing" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_patroni_intermediate/intermediate/set-signed" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_patroni_intermediate/config/issuers" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_openstack_postgres_patroni_intermediate/roles/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+
+  path "pki_openstack_postgres_root/config/issuers" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_root/issuers/generate/root/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_root/issuer/+" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_root/root/sign-intermediate" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_intermediate/keys/generate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_intermediate/key/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_openstack_postgres_intermediate/issuers/generate/intermediate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_intermediate/issuers/generate/intermediate/existing" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_intermediate/intermediate/set-signed" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_postgres_intermediate/config/issuers" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_openstack_postgres_intermediate/roles/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
   EOF
   ```
