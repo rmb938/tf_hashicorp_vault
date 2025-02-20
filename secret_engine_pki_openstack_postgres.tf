@@ -106,6 +106,30 @@ resource "vault_pki_secret_backend_config_issuers" "pki_openstack_postgres_inter
   default_follows_latest_issuer = false
 }
 
+resource "vault_pki_secret_backend_role" "pki_openstack_postgres_intermediate_server_pgbouncer" {
+  backend       = vault_mount.pki_openstack_postgres_intermediate.path
+  name          = "server-pgbouncer"
+  issuer_ref    = "default"
+  ttl           = "7776000" # 90 days
+  max_ttl       = "7776000"
+  allow_ip_sans = false
+  allowed_domains = [
+    "openstack-postgres.service.consul",
+    "replica.openstack-postgres.service.consul",
+    "primary.openstack-postgres.service.consul",
+  ]
+  allow_bare_domains  = true
+  allow_subdomains    = false
+  enforce_hostnames   = true
+  server_flag         = true
+  client_flag         = true
+  key_type            = "ec"
+  key_bits            = 256
+  generate_lease      = false
+  no_store            = true
+  not_before_duration = "30s"
+}
+
 resource "vault_pki_secret_backend_role" "pki_openstack_postgres_intermediate_user_postgres" {
   backend             = vault_mount.pki_openstack_postgres_intermediate.path
   name                = "user-postgres"
