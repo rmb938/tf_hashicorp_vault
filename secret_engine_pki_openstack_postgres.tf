@@ -25,7 +25,7 @@ resource "vault_pki_secret_backend_root_cert" "pki_openstack_postgres_root" {
 resource "vault_pki_secret_backend_issuer" "pki_openstack_postgres_root" {
   backend     = vault_pki_secret_backend_root_cert.pki_openstack_postgres_root.backend
   issuer_ref  = vault_pki_secret_backend_root_cert.pki_openstack_postgres_root.issuer_id
-  issuer_name = "openstack-postgres--root"
+  issuer_name = "openstack-postgres-root"
 
   lifecycle {
     prevent_destroy = true
