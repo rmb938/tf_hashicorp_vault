@@ -106,7 +106,7 @@ resource "vault_pki_secret_backend_config_issuers" "pki_openstack_rabbitmq_inter
   default_follows_latest_issuer = false
 }
 
-resource "vault_pki_secret_backend_role" "pki_openstack_rabbitmq_intermediate_server_pgbouncer" {
+resource "vault_pki_secret_backend_role" "pki_openstack_rabbitmq_intermediate_server" {
   backend       = vault_mount.pki_openstack_rabbitmq_intermediate.path
   name          = "server"
   issuer_ref    = "default"
