@@ -237,5 +237,39 @@ Terraform to manage Hashicorp Vault
   path "pki_openstack_rabbitmq_intermediate/roles/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+
+  path "pki_openstack_rabbitmq_cluster_root/config/issuers" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_rabbitmq_cluster_root/issuers/generate/root/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_rabbitmq_cluster_root/issuer/+" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_rabbitmq_cluster_root/root/sign-intermediate" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_rabbitmq_cluster_intermediate/keys/generate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_rabbitmq_cluster_intermediate/key/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_openstack_rabbitmq_cluster_intermediate/issuers/generate/intermediate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_rabbitmq_cluster_intermediate/issuers/generate/intermediate/existing" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_rabbitmq_cluster_intermediate/intermediate/set-signed" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_rabbitmq_cluster_intermediate/config/issuers" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_openstack_rabbitmq_cluster_intermediate/roles/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
   EOF
   ```

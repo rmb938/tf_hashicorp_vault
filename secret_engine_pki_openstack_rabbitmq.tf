@@ -25,7 +25,7 @@ resource "vault_pki_secret_backend_root_cert" "pki_openstack_rabbitmq_root" {
 resource "vault_pki_secret_backend_issuer" "pki_openstack_rabbitmq_root" {
   backend     = vault_pki_secret_backend_root_cert.pki_openstack_rabbitmq_root.backend
   issuer_ref  = vault_pki_secret_backend_root_cert.pki_openstack_rabbitmq_root.issuer_id
-  issuer_name = "openstack-rabbitmq--root"
+  issuer_name = "openstack-rabbitmq-root"
 
   lifecycle {
     prevent_destroy = true
@@ -128,22 +128,3 @@ resource "vault_pki_secret_backend_role" "pki_openstack_rabbitmq_intermediate_se
   not_before_duration = "30s"
 }
 
-resource "vault_pki_secret_backend_role" "pki_openstack_rabbitmq_intermediate_user_rabbitmq" {
-  backend             = vault_mount.pki_openstack_rabbitmq_intermediate.path
-  name                = "user-cli"
-  issuer_ref          = "default"
-  ttl                 = "7776000" # 90 days
-  max_ttl             = "7776000"
-  allow_ip_sans       = false
-  allowed_domains     = ["cli"]
-  allow_bare_domains  = true
-  allow_subdomains    = false
-  enforce_hostnames   = false
-  server_flag         = false
-  client_flag         = true
-  key_type            = "ec"
-  key_bits            = 256
-  generate_lease      = false
-  no_store            = true
-  not_before_duration = "30s"
-}
