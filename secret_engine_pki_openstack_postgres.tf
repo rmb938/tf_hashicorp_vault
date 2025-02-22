@@ -209,3 +209,4 @@ resource "vault_pki_secret_backend_role" "pki_openstack_postgres_intermediate_us
   no_store            = true
   not_before_duration = "30s"
 }
+
