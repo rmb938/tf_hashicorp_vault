@@ -65,6 +65,7 @@ resource "vault_pki_secret_backend_key" "pki_step_x5c_haproxy_intermediate" {
   type     = vault_pki_secret_backend_root_cert.pki_step_x5c_haproxy_root.type
   key_type = vault_pki_secret_backend_root_cert.pki_step_x5c_haproxy_root.key_type
   key_bits = vault_pki_secret_backend_root_cert.pki_step_x5c_haproxy_root.key_bits
+  key_name = "step-x5c-haproxy-intermediate-${count.index}"
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "pki_step_x5c_haproxy_intermediate" {

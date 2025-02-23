@@ -65,6 +65,7 @@ resource "vault_pki_secret_backend_key" "pki_consul_rpc_intermediate" {
   type     = vault_pki_secret_backend_root_cert.pki_consul_rpc_root.type
   key_type = vault_pki_secret_backend_root_cert.pki_consul_rpc_root.key_type
   key_bits = vault_pki_secret_backend_root_cert.pki_consul_rpc_root.key_bits
+  key_name = "consul-rpc-intermediate-${count.index}"
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "pki_consul_rpc_intermediate" {
