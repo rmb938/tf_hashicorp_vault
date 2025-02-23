@@ -65,6 +65,7 @@ resource "vault_pki_secret_backend_key" "pki_openstack_keystone_internal_interme
   type     = vault_pki_secret_backend_root_cert.pki_openstack_keystone_internal_root.type
   key_type = vault_pki_secret_backend_root_cert.pki_openstack_keystone_internal_root.key_type
   key_bits = vault_pki_secret_backend_root_cert.pki_openstack_keystone_internal_root.key_bits
+  key_name = "openstack-keystone-internal-intermediate-${count.index}"
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "pki_openstack_keystone_internal_intermediate" {
