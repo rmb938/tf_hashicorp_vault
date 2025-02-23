@@ -65,6 +65,7 @@ resource "vault_pki_secret_backend_key" "pki_openstack_rabbitmq_cluster_intermed
   type     = vault_pki_secret_backend_root_cert.pki_openstack_rabbitmq_cluster_root.type
   key_type = vault_pki_secret_backend_root_cert.pki_openstack_rabbitmq_cluster_root.key_type
   key_bits = vault_pki_secret_backend_root_cert.pki_openstack_rabbitmq_cluster_root.key_bits
+  key_name = "openstack-rabbitmq-cluster-intermediate-${count.index}"
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "pki_openstack_rabbitmq_cluster_intermediate" {

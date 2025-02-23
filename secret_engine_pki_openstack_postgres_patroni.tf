@@ -65,6 +65,7 @@ resource "vault_pki_secret_backend_key" "pki_openstack_postgres_patroni_intermed
   type     = vault_pki_secret_backend_root_cert.pki_openstack_postgres_patroni_root.type
   key_type = vault_pki_secret_backend_root_cert.pki_openstack_postgres_patroni_root.key_type
   key_bits = vault_pki_secret_backend_root_cert.pki_openstack_postgres_patroni_root.key_bits
+  key_name = "openstack-psotgres-patroni-intermediate-${count.index}"
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "pki_openstack_postgres_patroni_intermediate" {
