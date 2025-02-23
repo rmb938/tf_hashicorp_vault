@@ -25,7 +25,7 @@ resource "vault_pki_secret_backend_root_cert" "pki_openstack_keystone_internal_r
 resource "vault_pki_secret_backend_issuer" "pki_openstack_keystone_internal_root" {
   backend     = vault_pki_secret_backend_root_cert.pki_openstack_keystone_internal_root.backend
   issuer_ref  = vault_pki_secret_backend_root_cert.pki_openstack_keystone_internal_root.issuer_id
-  issuer_name = "openstack-openstack-keystone-internal-root"
+  issuer_name = "openstack-keystone-internal-root"
 
   lifecycle {
     prevent_destroy = true
@@ -72,7 +72,7 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "pki_openstack_key
 
   backend     = vault_mount.pki_openstack_keystone_internal_intermediate.path
   type        = "existing"
-  common_name = "Openstack Openstack Keystone Internal Intermediate ${count.index}"
+  common_name = "Openstack Keystone Internal Intermediate ${count.index}"
   key_ref     = vault_pki_secret_backend_key.pki_openstack_keystone_internal_intermediate[count.index].key_id
   key_type    = vault_pki_secret_backend_key.pki_openstack_keystone_internal_intermediate[count.index].key_type
   key_bits    = vault_pki_secret_backend_key.pki_openstack_keystone_internal_intermediate[count.index].key_bits
@@ -128,9 +128,9 @@ resource "vault_pki_secret_backend_role" "pki_openstack_keystone_internal_interm
   not_before_duration = "30s"
 }
 
-resource "vault_pki_secret_backend_role" "pki_openstack_keystone_internal_intermediate_glance" {
+resource "vault_pki_secret_backend_role" "pki_openstack_keystone_internal_intermediate_user_glance" {
   backend       = vault_mount.pki_openstack_keystone_internal_intermediate.path
-  name          = "glance"
+  name          = "user-glance"
   issuer_ref    = "default"
   ttl           = "7776000" # 90 days
   max_ttl       = "7776000"
@@ -138,7 +138,7 @@ resource "vault_pki_secret_backend_role" "pki_openstack_keystone_internal_interm
   allowed_domains = [
     "glance",
   ]
-  ou                  = "glance"
+  ou                  = ["glance"]
   allow_bare_domains  = true
   allow_subdomains    = false
   enforce_hostnames   = false
