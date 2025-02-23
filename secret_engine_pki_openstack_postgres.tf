@@ -99,6 +99,18 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "pki_openstack_postg
   }
 }
 
+resource "vault_pki_secret_backend_issuer" "pki_openstack_postgres_intermediate" {
+  count = local.pki_openstack_postgres_intermediates
+
+  backend     = vault_mount.pki_openstack_postgres_intermediate.path
+  issuer_ref  = vault_pki_secret_backend_intermediate_set_signed.pki_openstack_postgres_intermediate[local.pki_openstack_postgres_intermediates - 1].imported_issuers[0]
+  issuer_name = "openstack-postgres-intermediate-${count.index}"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "vault_pki_secret_backend_config_issuers" "pki_openstack_postgres_intermediate" {
   backend = vault_mount.pki_openstack_postgres_intermediate.path
 
