@@ -82,6 +82,9 @@ Terraform to manage Hashicorp Vault
   path "pki_consul_rpc_intermediate/key/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+  path "pki_consul_rpc_intermediate/issuer/+" {
+    capabilities = ["read", "update"]
+  }
   path "pki_consul_rpc_intermediate/issuers/generate/intermediate/internal" {
     capabilities = ["create", "read", "update"]
   }
@@ -115,6 +118,9 @@ Terraform to manage Hashicorp Vault
   }
   path "pki_step_x5c_haproxy_intermediate/key/+" {
     capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_step_x5c_haproxy_intermediate/issuer/+" {
+    capabilities = ["read", "update"]
   }
   path "pki_step_x5c_haproxy_intermediate/issuers/generate/intermediate/internal" {
     capabilities = ["create", "read", "update"]
@@ -154,6 +160,9 @@ Terraform to manage Hashicorp Vault
   path "pki_openstack_postgres_patroni_intermediate/key/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+  path "pki_openstack_postgres_patroni_intermediate/issuer/+" {
+    capabilities = ["read", "update"]
+  }
   path "pki_openstack_postgres_patroni_intermediate/issuers/generate/intermediate/internal" {
     capabilities = ["create", "read", "update"]
   }
@@ -187,6 +196,9 @@ Terraform to manage Hashicorp Vault
   }
   path "pki_openstack_postgres_intermediate/key/+" {
     capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_openstack_postgres_intermediate/issuer/+" {
+    capabilities = ["read", "update"]
   }
   path "pki_openstack_postgres_intermediate/issuers/generate/intermediate/internal" {
     capabilities = ["create", "read", "update"]
@@ -222,6 +234,9 @@ Terraform to manage Hashicorp Vault
   path "pki_openstack_rabbitmq_intermediate/key/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+  path "pki_openstack_rabbitmq_intermediate/issuer/+" {
+    capabilities = ["read", "update"]
+  }
   path "pki_openstack_rabbitmq_intermediate/issuers/generate/intermediate/internal" {
     capabilities = ["create", "read", "update"]
   }
@@ -255,6 +270,9 @@ Terraform to manage Hashicorp Vault
   }
   path "pki_openstack_rabbitmq_cluster_intermediate/key/+" {
     capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_openstack_rabbitmq_cluster_intermediate/issuer/+" {
+    capabilities = ["read", "update"]
   }
   path "pki_openstack_rabbitmq_cluster_intermediate/issuers/generate/intermediate/internal" {
     capabilities = ["create", "read", "update"]
