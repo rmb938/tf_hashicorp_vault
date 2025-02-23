@@ -99,6 +99,19 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "pki_step_x5c_haprox
   }
 }
 
+resource "vault_pki_secret_backend_issuer" "pki_step_x5c_haproxy_intermediate" {
+  count = local.pki_step_x5c_haproxy_intermediates
+
+  backend     = vault_mount.pki_step_x5c_haproxy_intermediate.path
+  issuer_ref  = vault_pki_secret_backend_intermediate_set_signed.pki_step_x5c_haproxy_intermediate[local.pki_step_x5c_haproxy_intermediates - 1].imported_issuers[0]
+  issuer_name = "step-x5c-haproxy-intermediate-${count.index}"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+
 resource "vault_pki_secret_backend_config_issuers" "pki_step_x5c_haproxy_intermediate" {
   backend = vault_mount.pki_step_x5c_haproxy_intermediate.path
 

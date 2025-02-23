@@ -290,6 +290,9 @@ Terraform to manage Hashicorp Vault
   path "pki_openstack_keystone_internal_intermediate/key/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+  path "pki_openstack_keystone_internal_intermediate/issuer/+" {
+    capabilities = ["read", "update"]
+  }
   path "pki_openstack_keystone_internal_intermediate/issuers/generate/intermediate/internal" {
     capabilities = ["create", "read", "update"]
   }

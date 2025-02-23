@@ -99,6 +99,18 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "pki_consul_rpc_inte
   }
 }
 
+resource "vault_pki_secret_backend_issuer" "pki_consul_rpc_intermediate" {
+  count = local.pki_consul_rpc_intermediates
+
+  backend     = vault_mount.pki_consul_rpc_intermediate.path
+  issuer_ref  = vault_pki_secret_backend_intermediate_set_signed.pki_consul_rpc_intermediate[local.pki_consul_rpc_intermediates - 1].imported_issuers[0]
+  issuer_name = "consul-rpc-intermediate-${count.index}"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "vault_pki_secret_backend_config_issuers" "pki_consul_rpc_intermediate" {
   backend = vault_mount.pki_consul_rpc_intermediate.path
 

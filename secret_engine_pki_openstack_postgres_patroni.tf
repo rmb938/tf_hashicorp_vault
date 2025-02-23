@@ -65,7 +65,7 @@ resource "vault_pki_secret_backend_key" "pki_openstack_postgres_patroni_intermed
   type     = vault_pki_secret_backend_root_cert.pki_openstack_postgres_patroni_root.type
   key_type = vault_pki_secret_backend_root_cert.pki_openstack_postgres_patroni_root.key_type
   key_bits = vault_pki_secret_backend_root_cert.pki_openstack_postgres_patroni_root.key_bits
-  key_name = "openstack-psotgres-patroni-intermediate-${count.index}"
+  key_name = "openstack-postgres-patroni-intermediate-${count.index}"
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "pki_openstack_postgres_patroni_intermediate" {
@@ -93,6 +93,18 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "pki_openstack_postg
 
   backend     = vault_mount.pki_openstack_postgres_patroni_intermediate.path
   certificate = vault_pki_secret_backend_root_sign_intermediate.pki_openstack_postgres_patroni_intermediate[count.index].certificate_bundle
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "vault_pki_secret_backend_issuer" "pki_openstack_postgres_patroni_intermediate" {
+  count = local.pki_openstack_postgres_patroni_intermediates
+
+  backend     = vault_mount.pki_openstack_postgres_patroni_intermediate.path
+  issuer_ref  = vault_pki_secret_backend_intermediate_set_signed.pki_openstack_postgres_patroni_intermediate[local.pki_openstack_postgres_patroni_intermediates - 1].imported_issuers[0]
+  issuer_name = "openstack-postgres-patroni-intermediate-${count.index}"
 
   lifecycle {
     prevent_destroy = true

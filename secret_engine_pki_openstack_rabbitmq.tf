@@ -99,6 +99,18 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "pki_openstack_rabbi
   }
 }
 
+resource "vault_pki_secret_backend_issuer" "pki_openstack_rabbitmq_intermediate" {
+  count = local.pki_openstack_rabbitmq_intermediates
+
+  backend     = vault_mount.pki_openstack_rabbitmq_intermediate.path
+  issuer_ref  = vault_pki_secret_backend_intermediate_set_signed.pki_openstack_rabbitmq_intermediate[local.pki_openstack_rabbitmq_intermediates - 1].imported_issuers[0]
+  issuer_name = "openstack-rabbitmq-intermediate-${count.index}"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "vault_pki_secret_backend_config_issuers" "pki_openstack_rabbitmq_intermediate" {
   backend = vault_mount.pki_openstack_rabbitmq_intermediate.path
 
