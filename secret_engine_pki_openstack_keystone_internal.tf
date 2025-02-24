@@ -141,6 +141,30 @@ resource "vault_pki_secret_backend_role" "pki_openstack_keystone_internal_interm
   not_before_duration = "30s"
 }
 
+resource "vault_pki_secret_backend_role" "pki_openstack_keystone_internal_intermediate_user_admin" {
+  backend       = vault_mount.pki_openstack_keystone_internal_intermediate.path
+  name          = "user-admin"
+  issuer_ref    = "default"
+  ttl           = "7776000" # 90 days
+  max_ttl       = "7776000"
+  allow_ip_sans = false
+  allowed_domains = [
+    "admin",
+  ]
+  ou                  = ["admin"]
+  allow_bare_domains  = true
+  allow_subdomains    = false
+  enforce_hostnames   = false
+  server_flag         = false
+  client_flag         = true
+  key_type            = "ec"
+  key_bits            = 256
+  generate_lease      = false
+  no_store            = true
+  not_before_duration = "30s"
+}
+
+
 resource "vault_pki_secret_backend_role" "pki_openstack_keystone_internal_intermediate_user_glance" {
   backend       = vault_mount.pki_openstack_keystone_internal_intermediate.path
   name          = "user-glance"
