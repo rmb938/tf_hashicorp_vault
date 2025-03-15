@@ -11,7 +11,7 @@ resource "vault_transit_secret_backend_key" "transit_openstack_keystone_token" {
   backend = vault_mount.transit_openstack_keystone_token.path
   name    = "token"
 
-  type             = "ecdsa-p384"
+  type             = "ecdsa-p256"
   deletion_allowed = false
 
   exportable             = false
