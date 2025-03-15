@@ -20,7 +20,7 @@ resource "vault_transit_secret_backend_key" "transit_openstack_keystone_credenti
   min_decryption_version = 0
   min_encryption_version = 0
 
-  auto_rotate_period = "168h" // 1 week
+  auto_rotate_period = 604800 // 1 week
 
   lifecycle {
     prevent_destroy = true
