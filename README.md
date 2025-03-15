@@ -326,5 +326,19 @@ Terraform to manage Hashicorp Vault
   path "pki_openstack_keystone_internal_intermediate/roles/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+
+  path "transit_openstack_keystone_token/keys/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "transit_openstack_keystone_token/keys/+/config" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  
+  path "transit_openstack_keystone_credential/keys/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "transit_openstack_keystone_credential/keys/+/config" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
   EOF
   ```
