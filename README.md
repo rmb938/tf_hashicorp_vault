@@ -290,43 +290,6 @@ Terraform to manage Hashicorp Vault
     capabilities = ["create", "read", "update", "delete"]
   }
 
-  path "pki_openstack_keystone_internal_root/config/issuers" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_openstack_keystone_internal_root/issuers/generate/root/internal" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_openstack_keystone_internal_root/issuer/+" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_openstack_keystone_internal_root/root/sign-intermediate" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_openstack_keystone_internal_intermediate/keys/generate/internal" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_openstack_keystone_internal_intermediate/key/+" {
-    capabilities = ["create", "read", "update", "delete"]
-  }
-  path "pki_openstack_keystone_internal_intermediate/issuer/+" {
-    capabilities = ["read", "update"]
-  }
-  path "pki_openstack_keystone_internal_intermediate/issuers/generate/intermediate/internal" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_openstack_keystone_internal_intermediate/issuers/generate/intermediate/existing" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_openstack_keystone_internal_intermediate/intermediate/set-signed" {
-    capabilities = ["create", "read", "update"]
-  }
-  path "pki_openstack_keystone_internal_intermediate/config/issuers" {
-    capabilities = ["create", "read", "update", "delete"]
-  }
-  path "pki_openstack_keystone_internal_intermediate/roles/+" {
-    capabilities = ["create", "read", "update", "delete"]
-  }
-
   path "transit_openstack_keystone_token/keys/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
