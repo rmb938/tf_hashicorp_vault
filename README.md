@@ -333,6 +333,13 @@ Terraform to manage Hashicorp Vault
   path "transit_openstack_keystone_token/keys/+/config" {
     capabilities = ["create", "read", "update", "delete"]
   }
+
+  path "transit_openstack_keystone_receipt/keys/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "transit_openstack_keystone_receipt/keys/+/config" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
   
   path "transit_openstack_keystone_credential/keys/+" {
     capabilities = ["create", "read", "update", "delete"]
