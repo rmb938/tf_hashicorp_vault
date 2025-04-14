@@ -310,5 +310,9 @@ Terraform to manage Hashicorp Vault
   path "transit_openstack_keystone_credential/keys/+/config" {
     capabilities = ["create", "read", "update", "delete"]
   }
+
+  path "openstack-keystone/expected-service-users/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
   EOF
   ```
