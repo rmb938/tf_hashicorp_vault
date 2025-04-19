@@ -314,5 +314,42 @@ Terraform to manage Hashicorp Vault
   path "secret/openstack-keystone/expected-service-users/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+
+  path "pki_openstack_ovn_ovsdb_root/config/issuers" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_ovn_ovsdb_root/issuers/generate/root/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_ovn_ovsdb_root/issuer/+" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_ovn_ovsdb_root/root/sign-intermediate" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_ovn_ovsdb_intermediate/keys/generate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_ovn_ovsdb_intermediate/key/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_openstack_ovn_ovsdb_intermediate/issuer/+" {
+    capabilities = ["read", "update"]
+  }
+  path "pki_openstack_ovn_ovsdb_intermediate/issuers/generate/intermediate/internal" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_ovn_ovsdb_intermediate/issuers/generate/intermediate/existing" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_ovn_ovsdb_intermediate/intermediate/set-signed" {
+    capabilities = ["create", "read", "update"]
+  }
+  path "pki_openstack_ovn_ovsdb_intermediate/config/issuers" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
+  path "pki_openstack_ovn_ovsdb_intermediate/roles/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
   EOF
   ```
