@@ -134,6 +134,7 @@ resource "vault_pki_secret_backend_role" "pki_openstack_ovn_ovsdb_intermediate_s
     "openstack-ovn-northd-1.node.consul",
     "openstack-ovn-northd-2.node.consul",
     "openstack-ovn-northd-3.node.consul",
+    "openstack-ovn-northd-nb-ovsdb.service.consul",
     "openstack-ovn-northd-sb-ovsdb.service.consul"
   ]
   allow_bare_domains  = true
