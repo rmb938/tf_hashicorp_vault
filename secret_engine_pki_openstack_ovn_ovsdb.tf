@@ -172,14 +172,14 @@ resource "vault_pki_secret_backend_role" "pki_openstack_ovn_ovsdb_intermediate_u
   not_before_duration = "30s"
 }
 
-resource "vault_pki_secret_backend_role" "pki_openstack_ovn_ovsdb_intermediate_user_central" {
+resource "vault_pki_secret_backend_role" "pki_openstack_ovn_ovsdb_intermediate_user_neutron_controller" {
   backend             = vault_mount.pki_openstack_ovn_ovsdb_intermediate.path
-  name                = "user-central"
+  name                = "user-neutron-controller"
   issuer_ref          = "default"
   ttl                 = "7776000" # 90 days
   max_ttl             = "7776000"
   allow_ip_sans       = false
-  allowed_domains     = ["central"]
+  allowed_domains     = ["neutron-controller"]
   allow_bare_domains  = true
   allow_subdomains    = false
   enforce_hostnames   = false
