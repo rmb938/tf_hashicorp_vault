@@ -180,3 +180,63 @@ resource "vault_pki_secret_backend_role" "pki_openstack_rabbitmq_intermediate_us
   no_store            = true
   not_before_duration = "30s"
 }
+
+resource "vault_pki_secret_backend_role" "pki_openstack_rabbitmq_intermediate_user_neutron_compute" {
+  backend             = vault_mount.pki_openstack_rabbitmq_intermediate.path
+  name                = "user-neutron-compute"
+  issuer_ref          = "default"
+  ttl                 = "7776000" # 90 days
+  max_ttl             = "7776000"
+  allow_ip_sans       = false
+  allowed_domains     = ["neutron-compute"]
+  allow_bare_domains  = true
+  allow_subdomains    = false
+  enforce_hostnames   = false
+  server_flag         = false
+  client_flag         = true
+  key_type            = "ec"
+  key_bits            = 256
+  generate_lease      = false
+  no_store            = true
+  not_before_duration = "30s"
+}
+
+resource "vault_pki_secret_backend_role" "pki_openstack_rabbitmq_intermediate_user_nova_controller" {
+  backend             = vault_mount.pki_openstack_rabbitmq_intermediate.path
+  name                = "user-nova-controller"
+  issuer_ref          = "default"
+  ttl                 = "7776000" # 90 days
+  max_ttl             = "7776000"
+  allow_ip_sans       = false
+  allowed_domains     = ["nova-controller"]
+  allow_bare_domains  = true
+  allow_subdomains    = false
+  enforce_hostnames   = false
+  server_flag         = false
+  client_flag         = true
+  key_type            = "ec"
+  key_bits            = 256
+  generate_lease      = false
+  no_store            = true
+  not_before_duration = "30s"
+}
+
+resource "vault_pki_secret_backend_role" "pki_openstack_rabbitmq_intermediate_user_nova_compute" {
+  backend             = vault_mount.pki_openstack_rabbitmq_intermediate.path
+  name                = "user-nova-compute"
+  issuer_ref          = "default"
+  ttl                 = "7776000" # 90 days
+  max_ttl             = "7776000"
+  allow_ip_sans       = false
+  allowed_domains     = ["nova-compute"]
+  allow_bare_domains  = true
+  allow_subdomains    = false
+  enforce_hostnames   = false
+  server_flag         = false
+  client_flag         = true
+  key_type            = "ec"
+  key_bits            = 256
+  generate_lease      = false
+  no_store            = true
+  not_before_duration = "30s"
+}
