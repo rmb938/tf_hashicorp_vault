@@ -311,7 +311,7 @@ resource "vault_pki_secret_backend_role" "pki_openstack_postgres_intermediate_us
   ttl                 = "7776000" # 90 days
   max_ttl             = "7776000"
   allow_ip_sans       = false
-  allowed_domains     = ["nova", "nova-api"]
+  allowed_domains     = ["nova", "nova-api", "nova-cell0", "nova-cell1"]
   allow_bare_domains  = true
   allow_subdomains    = false
   enforce_hostnames   = false
