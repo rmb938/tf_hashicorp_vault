@@ -194,7 +194,7 @@ resource "vault_pki_secret_backend_role" "pki_openstack_ovn_ovsdb_intermediate_u
 
 resource "vault_pki_secret_backend_role" "pki_openstack_ovn_ovsdb_intermediate_user_neutron_compute" {
   backend             = vault_mount.pki_openstack_ovn_ovsdb_intermediate.path
-  name                = "user-neutron-controller"
+  name                = "user-neutron-compute"
   issuer_ref          = "default"
   ttl                 = "7776000" # 90 days
   max_ttl             = "7776000"
