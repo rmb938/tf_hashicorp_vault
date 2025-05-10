@@ -314,6 +314,9 @@ Terraform to manage Hashicorp Vault
   path "secret/openstack-keystone/expected-service-users/+" {
     capabilities = ["create", "read", "update", "delete"]
   }
+  path "secret/openstack-keystone/project-service-users/+" {
+    capabilities = ["create", "read", "update", "delete"]
+  }
 
   path "pki_openstack_ovn_ovsdb_root/config/issuers" {
     capabilities = ["create", "read", "update"]
