@@ -2,10 +2,6 @@ resource "vault_policy" "gha_rmb938_tf_hashicorp_vault_apps" {
   name = "gha_rmb938_tf_hashicorp_vault_apps"
 
   policy = <<EOT
-path "secret/consul/management_token" {
-  capabilities = ["read"]
-}
-
 path "auth/token/create" {
   capabilities = ["update"]
 }
