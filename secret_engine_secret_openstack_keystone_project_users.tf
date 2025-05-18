@@ -25,3 +25,13 @@ resource "vault_kv_secret" "openstack_keystone_project_application-platform_user
 
   depends_on = [vault_mount.secret]
 }
+
+resource "vault_kv_secret" "openstack_keystone_project_application-platform_user_platform-packer" {
+  path = "${vault_mount.secret.path}/openstack-keystone/expected-project-users/project_application-platform_user_platform-packer"
+  data_json = jsonencode({
+    project  = "application-platform"
+    username = "platform-packer"
+  })
+
+  depends_on = [vault_mount.secret]
+}
